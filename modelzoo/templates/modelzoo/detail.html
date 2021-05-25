@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if model.formatted_markdown %}
+  {{ model.formatted_markdown | safe }}
+
+{% endif %}
+
+{% if model.ipynb %}
+  <div class="jpnb">
+  <p>
+  <a href=" {% url 'modelzoo:detail_nb' model.slug %}"><img src="{% static "modelzoo/jupyter2.png" %}" width="70"></a>
+    &nbsp; A static jupyter notebook example for usage in python can be found <a href=" {% url 'modelzoo:detail_nb' model.slug %}">here</a>
+  </p>
+  </div>
+{% endif %}
+
+{% endblock %}

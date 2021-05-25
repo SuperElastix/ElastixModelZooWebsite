@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1><img src="{% static "modelzoo/elastixLogo.gif" %}" alt="elastixLogo.gif" height="100"> Model Zoo</h1>
+      <p class="lead text-muted">A Model Zoo for parameter files used for image registration with Elastix, SimpleElastix or ITKElastix in various domains. Parameter files can be uploaded via the <a href="https://github.com/SuperElastix/ElastixModelZoo">GitHub repository.</a></p>
+      <p>
+        <form action="{% url 'modelzoo:index' %}" method="GET" value="{{ request.GET.q }}">
+          <input name="q" type="text" value="{{request.GET.q}}" placeholder="Search..."/>
+          <input type="submit" name="submit" value="Search"/>
+        </form>
+      </p>
+    </div>
+  </section>
+
+  <button onclick="myFunction()" class='btn btn-dark'> Switch view </button>
+
+
+  {% if model_list %}
+    <div id="albumList" class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+      {% for model in model_list %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <a href=" {% url 'modelzoo:detail' model.slug %}">{{ model.title }}</a>
+            <div class="card-body">
+              <p class="card-text"> {% if model.short_description_rm %}
+                                        {{ model.short_description_rm }}
+                                    {% else %}
+                                        {{ model.short_description }}</p>
+                                    {% endif %}
+              <div class="d-flex justify-content-between align-items-center">
+                <!-- <small class="text-muted">{{ model.content }} {{ model.modality }} {{ model.dimensions }}</small> -->
+                <small class="text-muted">{{ model.con_mod_dims }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+	</div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+	  <font size="2">
+	  <table id="dataTable" class="table table-sm table-hover">
+	      <thead>
+		      <tr>
+			      <th scope="col">Name</th>
+	  		      <th onclick="sortTable(0)" scope="col">Image Properties</th>
+			      <th onclick="sortTable(1)" scope="col">Description</th>
+		      	      <th onclick="sortTable(2)" scope="col">Paper</th>
+		     </tr>
+	      </thead>
+	      <tbody>
+		      {% for model in model_list %}
+		      <tr class="clickable-row" data-href="{% url 'modelzoo:detail' model.slug %}">
+			      <th scope="row">{{ model.title }}</th>
+			      <td> {{ model.con_mod_dims }} </td>
+			      <td> {{ model.short_description_rm }} </td>
+			      <td> {{ model.paper }} </td>
+		      </tr>
+		      {% endfor%}
+	      </tbody>
+      </table>
+  </div>
+  <div>
+  {% else %}
+      <p>No models available.</p>
+  {% endif %}
+
+{% endblock %}

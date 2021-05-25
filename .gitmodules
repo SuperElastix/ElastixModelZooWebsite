@@ -1,0 +1,3 @@
+[submodule "ElastixModelZoo"]
+	path = ElastixModelZoo
+	url = https://github.com/SuperElastix/ElastixModelZoo.git

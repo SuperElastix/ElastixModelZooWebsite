@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="tags">
+  <a href=" {% url 'modelzoo:detail' model.slug %}">Back to Readme</a>
+</div>
+
+{{ model.formatted_ipynb | safe }}
+
+{% endblock %}
