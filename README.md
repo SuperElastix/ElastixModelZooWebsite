@@ -12,6 +12,9 @@ The elastix model zoo is a dynamic website that uses github's version control
 to monitor it's content contributions. The website is built with django and is hosted at:
 https://elastix.lumc.nl/modelzoo
 
+![Screenshot 2021-05-26 at 14 52 26](https://user-images.githubusercontent.com/33719474/119662811-1717a580-be32-11eb-842a-25c48432e9fb.png)
+
+
 The elastix model zoo repository is a submodule of this website repository and
 has to be cloned separately. In order to do so, run the following after a clone of this repository:
 
